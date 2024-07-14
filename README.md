@@ -13,7 +13,7 @@ add ./dist
 ```sh
 npm init -y
 npm install express
-npm install --save @types/express
+npm install @types/express --save-dev
 ```
 
 ```json
