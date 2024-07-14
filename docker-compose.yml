@@ -3,11 +3,17 @@ version: '3.4'
 services:
   dockernginxts: # <SERVICE-NAME>
     image: docker-nginx-ts # <IMAGE-NAME>
-    container_name: docker-nginx-ts # <CONTAINER-NAME>
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - dockernginxts
     ports:
       - 3000:3000

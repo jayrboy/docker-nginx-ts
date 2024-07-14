@@ -65,24 +65,22 @@ docker compose up --scale dockernginxts=3 # error scale <SERVICE-NAME>=3
 version: '3.4'
 
 services:
-  api:
-    image: api
-    # TODO: comment a <CONTAINER-NAME>
-    # container_name: api
+  dockernginxts:
+    image: docker-nginx-ts
+    # container_name: docker-nginx-ts # TODO: comment a <CONTAINER-NAME>
     build:
       context: .
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
-    # TODO: comment port
-    # ports:
+    # ports:  # TODO: comment port
     #   - 3000:3000
 ```
 
 3.2 ทดสอบ Scaling อีกครั้ง
 
 ```sh
-docker compose up --scale api=3 # running
+docker compose up --scale dockernginxts=3 # running
 ```
 
 #### Configuration with Nginx
@@ -93,8 +91,8 @@ docker compose up --scale api=3 # running
 version: '3.4'
 
 services:
-  api:
-    image: api
+  dockernginxts:
+    image: docker-nginx-ts
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -109,7 +107,7 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/conf.d
     depends_on:
-      - api
+      - dockernginxts
     ports:
       - 3000:3000
   #TODO: Added a Nginx
